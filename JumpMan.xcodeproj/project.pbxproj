@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		7E6A625E29C1405C009037B5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A625D29C1405C009037B5 /* main.cpp */; };
+		7E6A626629C14070009037B5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6A626529C14070009037B5 /* OpenGL.framework */; };
+		7E6A626829C14076009037B5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6A626729C14076009037B5 /* GLUT.framework */; };
+		7E6A626B29C140E1009037B5 /* physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A626929C140E1009037B5 /* physics.cpp */; };
+		7E6A626E29C140F4009037B5 /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A626C29C140F4009037B5 /* platform.cpp */; };
+		7E6A627129C14102009037B5 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A626F29C14102009037B5 /* player.cpp */; };
+		7E6A627429C14109009037B5 /* position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A627229C14109009037B5 /* position.cpp */; };
+		7E6A627729C1411E009037B5 /* uiDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A627529C1411E009037B5 /* uiDraw.cpp */; };
+		7E6A627A29C1412A009037B5 /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A627829C1412A009037B5 /* uiInteract.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +33,20 @@
 /* Begin PBXFileReference section */
 		7E6A625A29C1405C009037B5 /* JumpMan */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = JumpMan; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E6A625D29C1405C009037B5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		7E6A626529C14070009037B5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		7E6A626729C14076009037B5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		7E6A626929C140E1009037B5 /* physics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = physics.cpp; sourceTree = "<group>"; };
+		7E6A626A29C140E1009037B5 /* physics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = physics.h; sourceTree = "<group>"; };
+		7E6A626C29C140F4009037B5 /* platform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
+		7E6A626D29C140F4009037B5 /* platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		7E6A626F29C14102009037B5 /* player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
+		7E6A627029C14102009037B5 /* player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = player.h; sourceTree = "<group>"; };
+		7E6A627229C14109009037B5 /* position.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = position.cpp; sourceTree = "<group>"; };
+		7E6A627329C14109009037B5 /* position.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = position.h; sourceTree = "<group>"; };
+		7E6A627529C1411E009037B5 /* uiDraw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = uiDraw.cpp; sourceTree = "<group>"; };
+		7E6A627629C1411E009037B5 /* uiDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uiDraw.h; sourceTree = "<group>"; };
+		7E6A627829C1412A009037B5 /* uiInteract.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = uiInteract.cpp; sourceTree = "<group>"; };
+		7E6A627929C1412A009037B5 /* uiInteract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uiInteract.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E6A626829C14076009037B5 /* GLUT.framework in Frameworks */,
+				7E6A626629C14070009037B5 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +67,7 @@
 			children = (
 				7E6A625C29C1405C009037B5 /* JumpMan */,
 				7E6A625B29C1405C009037B5 /* Products */,
+				7E6A626429C14070009037B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +83,29 @@
 			isa = PBXGroup;
 			children = (
 				7E6A625D29C1405C009037B5 /* main.cpp */,
+				7E6A626F29C14102009037B5 /* player.cpp */,
+				7E6A627029C14102009037B5 /* player.h */,
+				7E6A627229C14109009037B5 /* position.cpp */,
+				7E6A627329C14109009037B5 /* position.h */,
+				7E6A626C29C140F4009037B5 /* platform.cpp */,
+				7E6A626D29C140F4009037B5 /* platform.h */,
+				7E6A626929C140E1009037B5 /* physics.cpp */,
+				7E6A626A29C140E1009037B5 /* physics.h */,
+				7E6A627529C1411E009037B5 /* uiDraw.cpp */,
+				7E6A627629C1411E009037B5 /* uiDraw.h */,
+				7E6A627829C1412A009037B5 /* uiInteract.cpp */,
+				7E6A627929C1412A009037B5 /* uiInteract.h */,
 			);
 			path = JumpMan;
+			sourceTree = "<group>";
+		};
+		7E6A626429C14070009037B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E6A626729C14076009037B5 /* GLUT.framework */,
+				7E6A626529C14070009037B5 /* OpenGL.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +165,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E6A627129C14102009037B5 /* player.cpp in Sources */,
 				7E6A625E29C1405C009037B5 /* main.cpp in Sources */,
+				7E6A626E29C140F4009037B5 /* platform.cpp in Sources */,
+				7E6A627A29C1412A009037B5 /* uiInteract.cpp in Sources */,
+				7E6A626B29C140E1009037B5 /* physics.cpp in Sources */,
+				7E6A627429C14109009037B5 /* position.cpp in Sources */,
+				7E6A627729C1411E009037B5 /* uiDraw.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
