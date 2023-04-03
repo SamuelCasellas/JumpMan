@@ -6,7 +6,6 @@
 //
 
 #include "player.h"
-#include "physics.h"
 
 Player::Player() : jumpStrength(4.5), lateralStrength(3.0), ptPlayer(0.0, 0.0), maxSpeed(20.0), terminalVelocity(-6.0), playerWidth(15) {}
 
@@ -17,7 +16,7 @@ Player::Player(double x, double y) : jumpStrength(4.5), lateralStrength(3.0), pt
  *   For now, have the player's movement respond immediately to
  *   player input (accel and velocity are the same)
  */
-bool Player::userInput(const Interface * pUI, Platform platforms[]) {
+bool Player::userInput(const Interface * pUI, Platform platforms[], int numPlatforms) {
     if (pUI->isRight() && pUI->isLeft())
         this->ddx = this->dx = 0.0;
     else if (pUI->isRight())
@@ -27,24 +26,25 @@ bool Player::userInput(const Interface * pUI, Platform platforms[]) {
     else
         this->ddx = this->dx = 0.0;
         
-    
     // Return if jumped
-    if (pUI->isSpace() && isStandingOnGround(&platforms)) {
+    if (pUI->isSpace() && isStandingOnGround(platforms, numPlatforms)) {
         this->ddy = this->dy = this->jumpStrength;
         return true;
     }
     return false;
 }
 
-void Player::updateNewPosition(Platform platforms[], bool justJumped, double screenWidth, double screenHeight) {
+void Player::updateNewPosition(Platform platforms[], int numPlatforms, bool justJumped, double screenWidth, double screenHeight) {
     
-    if (!isStandingOnGround(&platforms)) {
-        ddy -= Physics::gravity*0.16;
-        dy += ddy*0.16;
+    double gravity = 3.0;
+    
+    if (!isStandingOnGround(platforms, numPlatforms)) {
+        ddy -= gravity * 0.16;
+        dy += ddy * 0.16;
         if (dy < terminalVelocity)
             dy = terminalVelocity;
     } else if (justJumped) {
-        dy += ddy*0.16;
+        dy += ddy * 0.16;
     } else {
         ddy = dy = 0.0;
     }
@@ -57,13 +57,10 @@ void Player::updateNewPosition(Platform platforms[], bool justJumped, double scr
     ptPlayer.setX(oldX + dx);
     ptPlayer.setY(oldY + dy);
     
-    playerBoundaryCorrections(oldPtPlayer, &platforms, screenWidth, screenHeight);
+    playerBoundaryCorrections(oldPtPlayer, platforms, numPlatforms, screenWidth, screenHeight);
 }
 
-bool Player::isStandingOnGround(Platform * platforms[]) {
-    
-    int numPlatforms = sizeof(*platforms) / sizeof(platforms[0]);
-    
+bool Player::isStandingOnGround(Platform platforms[], int numPlatforms) {
     double playX = ptPlayer.getX();
     double playY = ptPlayer.getY();
     
@@ -73,7 +70,7 @@ bool Player::isStandingOnGround(Platform * platforms[]) {
     
     // Check platforms
     for (int i = 0; i < numPlatforms; i++) {
-        Platform & p = (*platforms)[i];
+        Platform & p = platforms[i];
         
         if (p.floorY == playY
             && p.tL.getX() <= playX + playerWidth
@@ -85,47 +82,37 @@ bool Player::isStandingOnGround(Platform * platforms[]) {
 }
 
 
-void Player::playerBoundaryCorrections(Position original, Platform * platforms[], double screenWidth, double screenHeight) {
-    int numPlatforms = sizeof(*platforms) / sizeof(platforms[0]);
-    
-    std::cout << "Hello????\n";
+void Player::playerBoundaryCorrections(Position original, Platform platforms[], int numPlatforms, double screenWidth, double screenHeight) {
     double oldX = original.getX();
     double oldY = original.getY();
     
     double newX = ptPlayer.getX();
     double newY = ptPlayer.getY();
     
-    bool edgeOfMap = false;
-    
     if (newX < 0.0) {
         ptPlayer.setX(0.0);
         resetHorizontalForces();
-        edgeOfMap = true;
     }
     if (newX + playerWidth > screenWidth) {
         ptPlayer.setX(screenWidth - playerWidth);
         resetHorizontalForces();
-        edgeOfMap = true;
     }
 
     // Standing on ground
     if (newY < 0.0) {
         ptPlayer.setY(0.0);
         resetVerticalForces();
-        edgeOfMap = true;
     }
     // Hit ceiling
     if (newY + playerWidth > screenHeight) {
         ptPlayer.setY(screenHeight - playerWidth);
         resetVerticalForces();
-        edgeOfMap = true;
     }
     
-    if (edgeOfMap) return;
     
     // Platforms
     for (int i = 0; i < numPlatforms; i++) {
-        Platform & pl = *platforms[i];
+        Platform & pl = platforms[i];
         if (!pl.isInside(ptPlayer, playerWidth)) continue;
         
         double rightX = pl.tR.getX();

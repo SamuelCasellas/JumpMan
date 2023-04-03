@@ -46,9 +46,14 @@
             filePath = "JumpMan/player.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< Updated upstream
             startingLineNumber = "33"
             endingLineNumber = "33"
-            landmarkName = "Player::userInput(pUI, platforms)"
+=======
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+>>>>>>> Stashed changes
+            landmarkName = "Player::userInput(pUI, platforms, numPlatforms)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -64,7 +69,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
             endingLineNumber = "42"
-            landmarkName = "Player::updateNewPosition(platforms, justJumped, screenWidth, screenHeight)"
+            landmarkName = "Player::updateNewPosition(platforms, numPlatforms, justJumped, screenWidth, screenHeight)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,9 +83,14 @@
             filePath = "JumpMan/player.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< Updated upstream
             startingLineNumber = "131"
             endingLineNumber = "131"
-            landmarkName = "Player::playerBoundaryCorrections(original, platforms, screenWidth, screenHeight)"
+=======
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+>>>>>>> Stashed changes
+            landmarkName = "Player::playerBoundaryCorrections(original, platforms, numPlatforms, screenWidth, screenHeight)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -94,9 +104,14 @@
             filePath = "JumpMan/player.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< Updated upstream
             startingLineNumber = "136"
             endingLineNumber = "136"
-            landmarkName = "Player::playerBoundaryCorrections(original, platforms, screenWidth, screenHeight)"
+=======
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+>>>>>>> Stashed changes
+            landmarkName = "Player::playerBoundaryCorrections(original, platforms, numPlatforms, screenWidth, screenHeight)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -130,6 +145,38 @@
                   offsetFromSymbolStart = "584">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "740B4F4A-0316-4B5A-9698-D8AF71746403"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JumpMan/player.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "Player::updateNewPosition(platforms, numPlatforms, justJumped, screenWidth, screenHeight)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7701BE61-30C1-42F8-8DAD-212387662ED3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JumpMan/player.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "Player::playerBoundaryCorrections(original, platforms, numPlatforms, screenWidth, screenHeight)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

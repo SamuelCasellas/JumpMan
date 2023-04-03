@@ -13,6 +13,8 @@
 #include "position.h"
 #include "player.h"
 #include "platform.h"
+#include "door.h"
+#include "key.h"
 
 using namespace std;
 
@@ -24,7 +26,9 @@ const double SCREEN_HEIGHT = 500.0;
 
 class Game {
 public:
-   Game(Position ptUpperRight) : player(0.0, 0.0),
+   Game(Position ptUpperRight) : door(SCREEN_WIDTH - 70.0, SCREEN_HEIGHT / 1.8 - 22.0),
+                                 key(150.0, 224.0),
+                                 player(0.0, 0.0),
                                  ptUpperRight(ptUpperRight),
                                  time(0.0)
    {
@@ -32,13 +36,22 @@ public:
       player.getPt().setX(ptUpperRight.getX() / 2.0);
    }
 
-   Platform platforms[1] = {
+   Platform platforms[4] = {
        Platform(Position(SCREEN_WIDTH / 6, SCREEN_HEIGHT / 7), SCREEN_WIDTH / 2, 40.0),
+       Platform(Position(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 225.0), 200.0, 20.0),
+       Platform(Position(40.0, SCREEN_HEIGHT / 3), 200, 20.0),
+       Platform(Position(SCREEN_WIDTH - 200.0, SCREEN_HEIGHT / 2.25), 200.0, 20.0),
    };
+    
+   int numPlatforms = sizeof(platforms) / sizeof(platforms[0]);
+   
+   Door door;
+   Key key;
     
    Player player;
    Position ptUpperRight;       // size of the screen
    double time;        // amount of time since began simulation (or last firing)
+   bool hasWon = false;
 };
 
 /*************************************
@@ -50,45 +63,74 @@ public:
  **************************************/
 void callBack(const Interface *pUI, void *p)
 {
-   // The first step (like every single callback function in OpenGL) is to cast the void pointer into a game object.
-   Game *pGame = (Game *)p;
+    // The first step (like every single callback function in OpenGL) is to cast the void pointer into a game object.
+    Game *pGame = (Game *)p;
 
-   // accept input
-   bool justJumped;
-   justJumped = pGame->player.userInput(pUI, pGame->platforms);
-    
-   // Update player position
-   pGame->player.updateNewPosition(pGame->platforms, justJumped, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-   //
-   // perform all the game logic
-   //
-    
-   //
-   // draw everything
-   //
+    //
+    // perform all the game logic
+    //
+     
+    Position ptPlayer = pGame->player.getPt();
+     
+    if (pGame->key.touches(ptPlayer, pGame->player.getPlayerWidth()))
+        pGame->key.openDoor(pGame->door);
+     
+    if (pGame->door.touches(ptPlayer, pGame->player.getPlayerWidth()) &&
+        pGame->door.isOpen())
+        pGame->hasWon = true;
+     
+    //
+    // draw everything
+    //
 
-   ogstream gout(Position(10.0, pGame->ptUpperRight.getY() - 20.0));
-   gout.drawRectangle(pGame->platforms[0].bL, pGame->platforms[0].tR, 0.0, 250.0, 0.0);
-    
-   // draw the player
-   gout.drawPlayer(pGame->player.getPt(), pGame->player.getOppositePoint());
+    ogstream gout(Position(10.0, pGame->ptUpperRight.getY() - 20.0));
 
-   // draw some text on the screen
-   gout.setf(ios::fixed | ios::showpoint);
-   gout.precision(1);
-   gout << "Time elsapsed: "
-        << pGame->time << "s\n";
+    // Door
+    auto [dR, dG, dB] = pGame->door.getColor();
+    gout.drawRectangle(pGame->door.getBottomLeft(), pGame->door.getUpperRight(), dR, dG, dB);
+     
+    // Platforms
+    for (int i = 0; i < pGame->numPlatforms; i++) {
+        gout.drawRectangle(pGame->platforms[i].bL, pGame->platforms[i].tR, 0.0, 250.0, 0.0);
+    }
+     
+    // Key
+    auto [kR, kG, kB] = pGame->key.getColor();
+    gout.drawRectangle(pGame->key.getBottomLeft(), pGame->key.getUpperRight(), kR, kG, kB);
+     
+    // Player
+    gout.drawRectangle(ptPlayer, pGame->player.getOppositePoint(), 0.0, 0.0, 0.0);
+
+    // draw some text on the screen
+    gout.setf(ios::fixed | ios::showpoint);
+    gout.precision(1);
     
-   pGame->time += 0.03;
+    gout << "Time elapsed: "
+         << pGame->time << "s    ";
+    
+    if (pGame->hasWon) {
+        gout << "You won!";
+        if (pUI->isSpace()) {
+            exit(0);
+        }
+    } else {
+        pGame->time += 0.03;
+    }
+        
+
+    // accept input
+    bool justJumped;
+    justJumped = pGame->player.userInput(pUI, pGame->platforms, pGame->numPlatforms);
+
+    // Update player position
+    pGame->player.updateNewPosition(pGame->platforms, pGame->numPlatforms, justJumped, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 
 int main(int argc, const char * argv[]) {
     //Initialize OpenGL
-    Position ptUpperRight;
-    ptUpperRight.setX(SCREEN_WIDTH);
-    ptUpperRight.setY(SCREEN_HEIGHT);
+    Position ptUpperRight(SCREEN_WIDTH, SCREEN_HEIGHT);
     Interface ui(0, NULL,
     "Jump Man",   /* name on the window */
      ptUpperRight);

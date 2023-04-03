@@ -157,11 +157,6 @@ void ogstream ::drawRectangle(const Position &begin, const Position &end,
    glEnd();
 }
 
-void ogstream::drawPlayer(const Position &begin, const Position &end,
-                          double red, double green, double blue) {
-    this->drawRectangle(begin, end, red, green, blue);
-}
-
 /***********************************************************************
  * DRAW Target
  * Draw a target on the screen at a given point

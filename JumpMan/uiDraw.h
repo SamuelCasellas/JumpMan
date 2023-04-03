@@ -66,8 +66,6 @@ public:
                          double red = 0.0, double green = 0.0, double blue = 0.0);
    virtual void drawRectangle(const Position &begin, const Position &end,
                               double red = 0.0, double green = 0.0, double blue = 0.0);
-   virtual void drawPlayer(const Position &begin, const Position &end,
-                           double red = 0.0, double green = 0.0, double blue = 0.0);
    virtual void drawTarget(const Position &pos);
    virtual void drawText(const Position &topLeft, const char *text);
 
@@ -103,7 +101,6 @@ public:
    void drawRectangle(const Position &begin, const Position &end,
                       double red = 0.0, double green = 0.0, double blue = 0.0) { assert(false); }
    void drawProjectile(const Position &pos, double age = 0.0) { assert(false); }
-   void drawPlayer(const Position &pos, double angle, double age) { assert(false); }
    void drawTarget(const Position &pos) { assert(false); }
    void drawText(const Position &topLeft, const char *text) { assert(false); }
 };

@@ -1,3 +1,6 @@
+# Author
+Samuel Casellas
+
 # JumpMan
 A C++ OpenGL game in meant to simulate a typical platformer.
 
@@ -8,7 +11,6 @@ A C++ OpenGL game in meant to simulate a typical platformer.
 4. Pick One Requirement
 5. Identify Entities
 6. Identify Collaborators
-
 
 # MVP
 
@@ -35,12 +37,19 @@ A C++ OpenGL game in meant to simulate a typical platformer.
     * ~~Subtract gravity to accel~~
 
 - The character shall pick up a key to open a door.
-    * Make a base class for TangibleObject
-    * TangibleObject shall have a touches method for the other object to know when in contact
-    * TangibleObject shall have a changeColor method to update the color of object.
-    * Derive two classes from this base class: Key and Door.
-    * Key class shall have dependency to door with openDoor method
+    * ~~Make a base class for TangibleObject~~
+    * ~~TangibleObject shall have a touches method for the other object to know when in contact~~
+    * ~~TangibleObject shall have a changeColor method to update the color of object.~~
+    * ~~Derive two classes from this base class: Key and Door.~~
+    * ~~Key class shall have dependency to door with openDoor method~~
 
 - The character shall reach the exit, and the game will be complete.
+    * 
 - The user shall hit the space button at the end and the window will close.
+    * Detect when the space bar is pressed when the game is in a completed state.
 # Future features
+    * Adding a more robust set of physics for lateral movement by implementing its own accel
+    * Generating graphics for the player to be a character rather than a square
+    * Creating enemies to avoid
+    * Adding more levels
+    * Adding sounds and music
