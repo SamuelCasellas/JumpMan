@@ -1,5 +1,5 @@
 //
-//  platform.hpp
+//  platform.h
 //  Wall_Jumper
 //
 //  Created by Samuel on 3/14/23.
@@ -10,7 +10,6 @@
 #ifndef platform_h
 #define platform_h
 
-#include "player.h"
 #include "position.h"
 
 #include <stdio.h>
@@ -21,7 +20,6 @@
  *
  ************************************************************************/
 class Platform {
-    
 public:
     Platform(Position bottomLeftPt, double length, double height);
     
@@ -31,7 +29,9 @@ public:
     Position bL;
     Position bR;
     
-    bool touchingPlayer(Player * pl);
+    const double floorY;
+    
+    bool isInside(Position & other, double playerWidth=0.0);
     
 };
 

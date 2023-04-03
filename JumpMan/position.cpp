@@ -5,15 +5,9 @@
 //  Created by Samuel on 3/7/23.
 //
 
-#pragma once
-
 #include "position.h"
 
-Position::Position(double x, double y) : x(0.0), y(0.0)
-{
-    setMetersX(x);
-    setMetersY(y);
-}
+Position::Position(double x, double y) : x(x), y(y) {}
 
 /******************************************
  * POINT : ASSIGNMENT
@@ -34,7 +28,7 @@ Position::Position(Position&& other)
  * For debugging
  *****************************************/
 std::ostream &operator<<(std::ostream &out, const Position &pt) {
-    out << "(" << pt.getMetersX() << "," << pt.getMetersY() << ")" << std::endl;
+    out << "(" << pt.getX() << "," << pt.getY() << ")" << std::endl;
     return out;
 }
 
@@ -43,8 +37,8 @@ std::istream &operator>>(std::istream &in, Position &pt) {
    double y;
    in >> x >> y;
 
-   pt.setMetersX(x);
-   pt.setMetersY(y);
+   pt.setX(x);
+   pt.setY(y);
 
    return in;
 }

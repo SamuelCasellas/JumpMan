@@ -1,12 +1,12 @@
 //
-//  position.hpp
+//  position.h
 //  Wall_Jumper
 //
 //  Created by Samuel on 3/7/23.
 //
 
-#ifndef position_hpp
-#define position_hpp
+#ifndef position_h
+#define position_h
 
 #pragma once
 
@@ -31,37 +31,24 @@ public:
    Position &operator=(const Position &pt);
 
    // getters
-   double getMetersX() const { return x; }
-   double getMetersY() const { return y; }
-   double getPixelsX() const { return x / metersFromPixels; }
-   double getPixelsY() const { return y / metersFromPixels; }
+    double getX() const { return x; }
+    double getY() const { return y;}
 
    // setters
-   void setMeters(double xMeters, double yMeters)
+   void setPosition(double x, double y)
    {
-      x = xMeters;
-      y = yMeters;
+      this->x = x;
+      this->y = y;
    }
-   void setMetersX(double xMeters) { x = xMeters; }
-   void setMetersY(double yMeters) { y = yMeters; }
-   void setPixelsX(double xPixels) { x = xPixels * metersFromPixels; }
-   void setPixelsY(double yPixels) { y = yPixels * metersFromPixels; }
-   void addMetersX(double dxMeters) { setMetersX(getMetersX() + dxMeters); }
-   void addMetersY(double dyMeters) { setMetersY(getMetersY() + dyMeters); }
-   void addPixelsX(double dxPixels) { setPixelsX(getPixelsX() + dxPixels); }
-   void addPixelsY(double dyPixels) { setPixelsY(getPixelsY() + dyPixels); }
+   void setX(double x) { this->x = x; }
+   void setY(double y) { this->y = y; }
 
-   // deal with the ratio of meters to pixels
-   void setZoom(double metersFromPixels)
-   {
-      this->metersFromPixels = metersFromPixels;
-   }
-   double getZoom() const { return metersFromPixels; }
-
+   void addX(double x) { this->x += x; }
+   void addY(double y) { this->y += y; }
+    
 private:
    double x; // horizontal position
    double y; // vertical position
-   inline static double metersFromPixels = 0.1;
 };
 
 /*********************************************
@@ -70,12 +57,11 @@ private:
  *********************************************/
 inline double computeDistance(const Position &pos1, const Position &pos2)
 {
-   return sqrt((pos1.getMetersX() - pos2.getMetersX()) * (pos1.getMetersX() - pos2.getMetersX()) +
-               (pos1.getMetersY() - pos2.getMetersY()) * (pos1.getMetersY() - pos2.getMetersY()));
+   return sqrt((pos1.getX() - pos2.getX()) * (pos1.getX() - pos2.getX()) +
+               (pos1.getY() - pos2.getY()) * (pos1.getY() - pos2.getY()));
 }
 
 void move();
-
 
 // stream I/O useful for debugging
 std::ostream &operator<<(std::ostream &out, const Position &pt);
@@ -92,4 +78,4 @@ struct PT
 };
 
 
-#endif /* position_hpp */
+#endif /* position_h */

@@ -56,3 +56,27 @@ double Physics::kinematicsEquation(double s, double a, double t)
     // s1
     return s + (a * t);
 }
+
+double Physics::linearInterpolationX(double y0, double y1, double x0, double x1, double y)
+{
+    if (y0 == y1)
+    {
+        return (x0 + x1) / 2.0;
+    }
+    else
+    {
+        return x0 + ((y - y0) * (x1 - x0) / (y1 - y0));
+    }
+}
+
+double Physics::linearInterpolationY(double x0, double x1, double y0, double y1, double x)
+{
+    if (x0 == x1)
+    {
+        return (y0 + y1) / 2.0;
+    }
+    else
+    {
+        return y0 + ((x - x0) * (y1 - y0) / (x1 - x0));
+    }
+}

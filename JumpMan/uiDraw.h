@@ -1,12 +1,12 @@
 //
-//  uiDraw.hpp
+//  uiDraw.h
 //  Wall_Jumper
 //
 //  Created by Samuel on 3/7/23.
 //
 
-#ifndef uiDraw_hpp
-#define uiDraw_hpp
+#ifndef uiDraw_h
+#define uiDraw_h
 /***********************************************************************
  * Header File:
  *    User Interface Draw : put pixels on the screen
@@ -110,4 +110,4 @@ public:
 
 #include <stdio.h>
 
-#endif /* uiDraw_hpp */
+#endif /* uiDraw_h */

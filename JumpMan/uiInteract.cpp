@@ -283,8 +283,8 @@ void Interface::initialize(int argc, char **argv, const char *title,
 
    // create the window
    glutInit(&argc, argv);
-   glutInitWindowSize((int)posUpperRight.getPixelsX() - 1,
-                      (int)posUpperRight.getPixelsY() - 1); // size of the window
+   glutInitWindowSize((int)posUpperRight.getX() - 1,
+                      (int)posUpperRight.getY() - 1); // size of the window
 
    glutInitWindowPosition(10, 10);              // initial position
    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB); // double buffering
@@ -293,9 +293,9 @@ void Interface::initialize(int argc, char **argv, const char *title,
 
    // set up the drawing style: B/W and 2D
    glClearColor(1.0, 1.0, 1.0, 0);                 // White is the background color
-   gluOrtho2D(0, (int)posUpperRight.getPixelsX(),  // range of x values: (0, width)
-              0, (int)posUpperRight.getPixelsY()); // range of y values: (0, height)
-   glutReshapeWindow((int)posUpperRight.getPixelsX(), (int)posUpperRight.getPixelsY());
+   gluOrtho2D(0, (int)posUpperRight.getX(),  // range of x values: (0, width)
+              0, (int)posUpperRight.getY()); // range of y values: (0, height)
+   glutReshapeWindow((int)posUpperRight.getX(), (int)posUpperRight.getY());
 
    // register the callbacks so OpenGL knows how to call us
    glutDisplayFunc(drawCallback);

@@ -54,7 +54,7 @@ inline void glResetColor()
  *************************************************************************/
 inline void glVertexPoint(const Position &pos)
 {
-   glVertex2f((GLfloat)pos.getPixelsX(), (GLfloat)pos.getPixelsY());
+   glVertex2f((GLfloat)pos.getX(), (GLfloat)pos.getY());
 }
 
 /*************************************************************************
@@ -72,7 +72,7 @@ void ogstream ::flush()
       {
          drawText(pos, sOut.c_str());
          sOut.clear();
-         pos.addPixelsY(-18);
+         pos.addX(-18);
       }
       // othewise append
       else
@@ -82,7 +82,7 @@ void ogstream ::flush()
    if (!sOut.empty())
    {
       drawText(pos, sOut.c_str());
-      pos.addPixelsY(-18);
+      pos.addY(-18);
    }
 
    // reset the buffer
@@ -100,7 +100,7 @@ void ogstream ::drawText(const Position &topLeft, const char *text)
    void *pFont = GLUT_TEXT;
 
    // prepare to draw the text from the top-left corner
-   glRasterPos2f((GLfloat)topLeft.getPixelsX(), (GLfloat)topLeft.getPixelsY());
+   glRasterPos2f((GLfloat)topLeft.getX(), (GLfloat)topLeft.getY());
 
    // loop through the text
    for (const char *p = text; *p; p++)
@@ -147,10 +147,10 @@ void ogstream ::drawRectangle(const Position &begin, const Position &end,
    glColor3f((GLfloat)red, (GLfloat)green, (GLfloat)blue);
 
    // Draw the actual line
-   glVertex2f((GLfloat)begin.getPixelsX(), (GLfloat)begin.getPixelsY());
-   glVertex2f((GLfloat)begin.getPixelsX(), (GLfloat)end.getPixelsY());
-   glVertex2f((GLfloat)end.getPixelsX(), (GLfloat)end.getPixelsY());
-   glVertex2f((GLfloat)end.getPixelsX(), (GLfloat)begin.getPixelsY());
+   glVertex2f((GLfloat)begin.getX(), (GLfloat)begin.getY());
+   glVertex2f((GLfloat)begin.getX(), (GLfloat)end.getY());
+   glVertex2f((GLfloat)end.getX(), (GLfloat)end.getY());
+   glVertex2f((GLfloat)end.getX(), (GLfloat)begin.getY());
 
    // Complete drawing
    glResetColor();
@@ -176,10 +176,10 @@ void ogstream ::drawTarget(const Position &pos)
    glColor3f((GLfloat)0.2 /* red % */, (GLfloat)0.75 /* green % */, (GLfloat)0.2 /* blue % */);
 
    // specify the corners
-   glVertex2f((GLfloat)(pos.getPixelsX() - size / 2.0), (GLfloat)(pos.getPixelsY() - size / 2.0));
-   glVertex2f((GLfloat)(pos.getPixelsX() - size / 2.0), (GLfloat)(pos.getPixelsY() + size / 2.0));
-   glVertex2f((GLfloat)(pos.getPixelsX() + size / 2.0), (GLfloat)(pos.getPixelsY() + size / 2.0));
-   glVertex2f((GLfloat)(pos.getPixelsX() + size / 2.0), (GLfloat)(pos.getPixelsY() - size / 2.0));
+   glVertex2f((GLfloat)(pos.getX() - size / 2.0), (GLfloat)(pos.getY() - size / 2.0));
+   glVertex2f((GLfloat)(pos.getX() - size / 2.0), (GLfloat)(pos.getY() + size / 2.0));
+   glVertex2f((GLfloat)(pos.getX() + size / 2.0), (GLfloat)(pos.getY() + size / 2.0));
+   glVertex2f((GLfloat)(pos.getX() + size / 2.0), (GLfloat)(pos.getY() - size / 2.0));
 
    // done
    glResetColor();

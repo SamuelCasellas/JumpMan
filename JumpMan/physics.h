@@ -26,8 +26,13 @@ public:
     static double calculateAngleFromComponents(double dx, double dy);
     static double calculateTotalVelocity(double dx, double dy);
     static double calculateDistance(double s, double v, double a, double t);
+    
+    static double linearInterpolationX(double y0, double y1, double x0, double x1, double y);
+    static double linearInterpolationY(double x0, double x1, double y0, double y1, double x);
 
     static double kinematicsEquation(double s, double a, double t);
+    
+    static inline double gravity = 3.0;
 };
 
 #endif /* Physics_h */

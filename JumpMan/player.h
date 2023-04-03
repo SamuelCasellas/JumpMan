@@ -1,5 +1,5 @@
 //
-//  character.hpp
+//  player.h
 //  Wall_Jumper
 //
 //  Created by Samuel on 3/14/23.
@@ -10,26 +10,38 @@
 
 #include <stdio.h>
 #include "position.h"
+#include "platform.h"
 #include "uiInteract.h"
 
 class Player {
-    const double jumpStrength; // the vertical thrust of the player's jump
-    const double lateralStrength;
+    // friend TestPlayer;
+    double jumpStrength; // the vertical thrust of the player's jump
+    double lateralStrength; // Acceleration from running
+    double maxSpeed;
+    double terminalVelocity;
 public:
-    Player(/* Starting position for ptPlayer */
-           double x, double y);
+    Player();
+    Player(double x, double y);
     
     Position getPt()const { return ptPlayer; }
     
-    void userInput(const Interface * pUI);
+    bool userInput(const Interface * pUI, Platform platforms[]);
     
-    // methods
-    void calculateNewPosition();
+    void updateNewPosition(Platform platforms[], bool justJumped, double screenWidth, double screenHeight);
     
     // For supporting the draw rectangle method in uiDraw
-    Position getOffsetPoint();
+    Position getOppositePoint();
 private:
     Position ptPlayer;
+    Position oldPtPlayer;
+    
+    const int playerWidth;
+    
+    bool isStandingOnGround(Platform * platforms[]);
+    void playerBoundaryCorrections(Position original, Platform * platforms[], double screenWidth, double screenHeight);
+    
+    void resetVerticalForces();
+    void resetHorizontalForces();
     
     double aRadians;            // Angle in radians
     double ddx;                 // Total horizontal acceleration
